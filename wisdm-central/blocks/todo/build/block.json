@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "wisdm-central/todo-single",
+  "version": "1.0.0",
+  "title": "Todo Single Template",
+  "category": "widgets",
+  "icon": "smiley",
+  "description": "Todo single Template",
+  "supports": {
+    "html": false
+  },
+  "textdomain": "wisdm-central",
+  "editorScript": "file:.\\index.js",
+  "script": "file:./save.js"
+}
