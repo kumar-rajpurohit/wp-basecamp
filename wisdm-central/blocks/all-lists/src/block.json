@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "wisdm-central/all-lists",
+	"version": "1.0.0",
+	"title": "Wisdm Central - All Todo Lists Template",
+	"category": "widgets",
+	"icon": "smiley",
+	"description": "Todo Archive Display Template",
+	"supports": {
+		"html": false
+	},
+	"textdomain": "wisdm-central",
+	"editorScript": "file:.\\index.js",
+	"script": "file:./save.js"
+}

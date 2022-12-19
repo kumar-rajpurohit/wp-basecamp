@@ -58,6 +58,12 @@ class CustomBlocks
 
         // Message Board ( Project specific Messages Archive ) Template Block.
         register_block_type( WISDM_CENTRAL_ABSPATH . '/blocks/board/build' );
+
+        // All Todo Lists ( Project specific Todo Archive ) Template Block.
+        register_block_type( WISDM_CENTRAL_ABSPATH . '/blocks/all-lists/build' );
+
+        // Single Todo List ( Project specific Todo Archive ) Template Block.
+        register_block_type( WISDM_CENTRAL_ABSPATH . '/blocks/list/build' );
     }
 
     public function remove_has_published_posts_from_api_user_query($prepared_args, $request)
