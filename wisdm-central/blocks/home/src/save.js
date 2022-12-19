@@ -82,18 +82,33 @@ import { IconArrowLeft } from '@tabler/icons';
 export default function save() {
     const [projects, setProjects] = useState(null);
     const [users, setUserList] = useState(null);
+    const [current_user, setCurrentUser] = useState(null);
     const [new_users, setNewUserList] = useState([]);
-    const [loading, setLoader ] = useState(false);
+    const [loading, setLoader] = useState(false);
 
     useEffect(() => {
         setLoader(true);
-        // Get Project Name
+        // Get current user details
         apiFetch({
-            path: 'wp/v2/wdm-central-project/',
+            path: 'wp/v2/users/me',
             method: 'GET'
-        }).then((data) => {
-            setProjects(data);
-            setLoader(false);
+        }).then((userdata) => {
+            setCurrentUser(userdata);
+
+            // Get Project Name
+            apiFetch({
+                path: 'wp/v2/wdm-central-project/',
+                method: 'GET'
+            }).then((data) => {
+                let _projects = [];
+                data.map((project)=>{
+                    if ( null !== project.acf.members && project.acf.members.includes(userdata.id) ) {
+                        _projects.push(project);
+                    }
+                })
+                setProjects(_projects);
+                setLoader(false);
+            });
         });
 
         // Get site users
@@ -275,7 +290,7 @@ export default function save() {
                         <SimpleGrid cols={3}>
                             {null !== projects && 0 < projects.length && projects.map((project) => (
                                 <div>
-                                    <Card shadow="sm" p="lg" radius="md" withBorder component="a" href={project.link} style={{textDecoration:'none'}}>
+                                    <Card shadow="sm" p="lg" radius="md" withBorder component="a" href={project.link} style={{ textDecoration: 'none' }}>
                                         <Card.Section withBorder inheritPadding py="xs">
                                             <Text weight={500}>{project.title.rendered}</Text>
                                         </Card.Section>
